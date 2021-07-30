@@ -1,17 +1,24 @@
+
 from pylab import *
+import matplotlib.pyplot as plt
+import numpy as np
 
-xval, yval, = meshgrid(arange(-20, 20, 5), arange(-20, 20, 5))
+x_range = y_range = np.arange(-20,20,5)
 
+xval, yval = np.meshgrid(x_range, y_range)
 
-G = 9.8     # gravity
-m1 = 1900000000000000000000000000     # Mass of obj 1 (jupiter) in kg
-m2 = 5970000000000000000000000    # Mass of obj 2 (Earth) in kg          feel free to change these
-r = 379.38   # distance b/n masses
-r = r*r     
+G = 6.67408E-11    # gravitation constant
+m1 = 597000     # Mass of obj 1 in kg
+m2 = 59700    # Mass of obj 2 in kg          feel free to change these
+r = 37900.35  ** 2 # distance b/n masses
+    
 
 xdot = yval
 ydot = G * (m1*m2/r)        # Newtons law of Grav
 
-streamplot(xval, yval, xdot, ydot)
+Q = plt.quiver(xval, yval, xdot, ydot, pivot="middle")
+plt.quiverkey(Q,1,1,1, "=Planet")
 
-show()
+plt.title("Planet Phase Space Thingy")
+plt.axis("scaled")
+plt.show()
